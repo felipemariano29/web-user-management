@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Registro de usuário!</h2>
+    <h2 class="title has-text-centered">Registro de usuário</h2>
     <hr />
 
     <div class="columns is-centered">
