@@ -28,7 +28,10 @@
 
                   <div class="is-divider-vertical"></div>
 
-                  <button class="button is-danger has-text-white">
+                  <button
+                    @click="showModal(user.id)"
+                    class="button is-danger has-text-white"
+                  >
                     Deletar
                   </button>
                 </div>
@@ -37,6 +40,37 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div
+      class="modal has-text-centered has-text-white"
+      :class="{ 'is-active': isModalActive }"
+    >
+      <div class="modal-background" @click="hideModal()"></div>
+
+      <div class="modal-content">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Você realmente deseja deletar este usuário?
+            </p>
+          </header>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item" @click="hideModal()"
+              >Cancelar</a
+            >
+            <a href="#" class="card-footer-item" @click="deleteUser(selectedId)"
+              >Sim, quero deletar!</a
+            >
+          </footer>
+        </div>
+      </div>
+
+      <button
+        @click="hideModal()"
+        class="modal-close is-large"
+        aria-label="close"
+      ></button>
     </div>
   </div>
 </template>
@@ -65,7 +99,38 @@ export default {
   data() {
     return {
       users: [],
+      isModalActive: false,
+      selectedId: null,
     };
+  },
+  methods: {
+    hideModal() {
+      this.isModalActive = false;
+    },
+    showModal(id) {
+      this.isModalActive = true;
+      this.selectedId = id;
+    },
+    deleteUser(id) {
+      const token = localStorage.getItem("token");
+
+      const req = {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+
+      axios
+        .delete(`http://localhost:8686/user/${id}`, req)
+        .then((res) => {
+          console.log(res.data);
+          this.hideModal();
+          this.users = this.users.filter((user) => user.id !== id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   computed: {
     processedRole() {
