@@ -22,9 +22,12 @@
               <td>{{ processedRole(user) }}</td>
               <td class="has-text-centered">
                 <div class="buttons is-centered">
-                  <button class="button is-success has-text-white">
-                    Editar
-                  </button>
+                  <router-link
+                    :to="{ name: 'users-edit', params: { id: user.id } }"
+                    ><button class="button is-success has-text-white">
+                      Editar
+                    </button></router-link
+                  >
 
                   <div class="is-divider-vertical"></div>
 

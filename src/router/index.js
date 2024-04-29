@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import RegisterView from "@/views/RegisterView.vue";
-import AboutView from "@/views/AboutView.vue";
 import LoginView from "@/views/LoginView.vue";
 import UsersView from "@/views/UsersView.vue";
+import EditView from "@/views/EditView.vue";
 import axios from "axios";
 
 const AdminAuth = (to, from, next) => {
@@ -53,9 +53,10 @@ const routes = [
     beforeEnter: AdminAuth,
   },
   {
-    path: "/about",
-    name: "about",
-    component: AboutView,
+    path: "/admin/users/edit/:id",
+    name: "users-edit",
+    component: EditView,
+    beforeEnter: AdminAuth,
   },
 ];
 
