@@ -18,8 +18,7 @@ const AdminAuth = (to, from, next) => {
 
     axios
       .post("http://localhost:8686/validate", {}, req)
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
         next();
       })
       .catch((err) => {
