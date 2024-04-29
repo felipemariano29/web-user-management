@@ -27,3 +27,4 @@ Antes de usar o aplicativo, é necessário configurar o ambiente. Certifique-se 
 - **Vue Router:** Roteador oficial para aplicativos Vue.js.
 - **Axios:** Cliente HTTP baseado em Promises para fazer requisições AJAX.
 - **Bulma:** Framework CSS baseado em flexbox para criar interfaces responsivas.
+- **JWT:** Autenticação baseada em tokens JSON Web Token para segurança da API.
