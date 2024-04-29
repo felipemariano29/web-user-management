@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Registro de usuário!</h2>
+    <h2>Login</h2>
     <hr />
 
     <div class="columns is-centered">
@@ -12,15 +12,6 @@
             <p class="has-text-white">{{ error }}</p>
           </div>
         </div>
-        <label class="label mt-4" for="name">Nome</label>
-        <input
-          id="name"
-          type="text"
-          placeholder="Insira o nome"
-          class="input"
-          v-model="name"
-        />
-
         <label class="label mt-4" for="email">Email</label>
         <input
           id="email"
@@ -39,8 +30,8 @@
           v-model="password"
         />
 
-        <button class="button is-success mt-5 has-text-white" @click="register">
-          Registrar
+        <button class="button is-success mt-5 has-text-white" @click="login">
+          Logar
         </button>
       </div>
     </div>
@@ -52,21 +43,21 @@ import axios from "axios";
 export default {
   data() {
     return {
-      name: "",
       email: "",
       password: "",
       error: false,
     };
   },
   methods: {
-    register() {
+    login() {
       axios
-        .post("http://localhost:8686/user", {
-          name: this.name,
+        .post("http://localhost:8686/login", {
           email: this.email,
           password: this.password,
         })
-        .then(() => {
+        .then((res) => {
+          const token = res.data.token;
+          localStorage.setItem("token", token);
           this.$router.push({ name: "home" });
         })
         .catch((err) => {
